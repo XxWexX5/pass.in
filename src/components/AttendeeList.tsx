@@ -1,4 +1,7 @@
 import { Search, MoreHorizontal, ChevronsLeft, ChevronLeft, ChevronRight, ChevronsRight } from 'lucide-react'
+import { IconButton } from './IconButton';
+
+import { Table } from './Table';
 
 export function AttendeeList() {
     return(
@@ -17,91 +20,89 @@ export function AttendeeList() {
             </div>
 
             <div className='border border-white/10 rounded-lg'>
-                <table className='w-full'>
-                    <thead>
-                        <tr className='border-b border-white/10'>
-                            <th className='w-[48px] py-3 px-4 text-sm font-semibold text-left'>
+                <Table.Root>
+                    <Table.Head>
+                        <Table.Row className='border-b border-white/10'>
+                            <Table.Header className='w-[48px]'>
                                 <input 
                                     type="checkbox"
                                     className='size-4 bg-black/20 rounded border-white/10'
                                 />
-                            </th>
-                            <th className='py-3 px-4 text-sm font-semibold text-left'>Código</th>
-                            <th className='py-3 px-4 text-sm font-semibold text-left'>Participante</th>
-                            <th className='py-3 px-4 text-sm font-semibold text-left'>Data de inscrição</th>
-                            <th className='py-3 px-4 text-sm font-semibold text-left'>Data do check-in</th>
-                            <th className='w-[64px] py-3 px-4 text-sm font-semibold text-left'></th>
-                        </tr>
-                    </thead>
+                            </Table.Header>
+                            <Table.Header>Código</Table.Header>
+                            <Table.Header>Participante</Table.Header>
+                            <Table.Header>Data de inscrição</Table.Header>
+                            <Table.Header>Data do check-in</Table.Header>
+                            <Table.Header className='w-[64px]'></Table.Header>
+                        </Table.Row>
+                    </Table.Head>
 
-                    <tbody>
+                    <Table.Body>
                         {
                             Array.from({ length: 8 }).map((_, i) => {
                                 return (
-                                    <tr key={i} className='border-b border-white/10 hover:bg-white/5'>
-                                        <td className='py-3 px-4 text-sm text-zinc-300'>
+                                    <Table.Row key={i} className='border-b border-white/10 hover:bg-white/5'>
+                                        <Table.Ceel>
                                             <input 
                                                 type='checkbox'
                                                 className='size-4 bg-black/20 rounded border-white/10'
                                             />
-                                        </td>
-                                        <td className='py-3 px-4 text-sm text-zinc-300'>12383</td>
-                                        <td className='py-3 px-4 text-sm text-zinc-300'>
+                                        </Table.Ceel>
+                                        <Table.Ceel>12383</Table.Ceel>
+                                        <Table.Ceel>
                                             <div className='flex flex-col gap-1'>
                                                 <span className='font-semibold text-white'>Wevison Ramalho Silva</span>
                                                 <span>wevisonramalho@gmail.com</span>
                                             </div>
-                                        </td>
-                                        <td className='py-3 px-4 text-sm text-zinc-300'>7 dias atrás</td>
-                                        <td className='py-3 px-4 text-sm text-zinc-300'>3 dias atrás</td>
-                                        <td className='py-3 px-4 text-sm text-zinc-300'>
-                                            <button className='bg-black/20 border border-white/10 rounded-md p-1.5'>
+                                        </Table.Ceel>
+                                        <Table.Ceel>7 dias atrás</Table.Ceel>
+                                        <Table.Ceel>3 dias atrás</Table.Ceel>
+                                        <Table.Ceel>
+                                            <IconButton className='bg-black/20'>
                                                 <MoreHorizontal className='size-4' />
-                                            </button>
-                                        </td>
-                                    </tr>
+                                            </IconButton>
+                                        </Table.Ceel>
+                                    </Table.Row>
                                 );
                             })
                         }
-                    </tbody>
+                    </Table.Body>
 
-                    <tfoot>
-                        <tr>
-                            <td 
-                                className='py-3 px-4 text-sm text-zinc-300' 
-                                colSpan={3}
-                            >
+                    <Table.Foot>
+                        <Table.Row>
+                            <Table.Ceel colSpan={3}>
                                 Mostrando 10 de 228 itens
-                            </td>
-                            <td 
-                                className='py-3 px-4 text-sm text-zinc-300 text-right'
+                            </Table.Ceel>
+
+                            <Table.Ceel 
+                                className='text-right'
                                 colSpan={3}
                             >
                                 <div className='inline-flex items-center gap-8'>
                                     Página 1 de 23
 
                                     <div className='flex gap-1.5'>
-                                        <button className='bg-white/10 border border-white/10 rounded-md p-1.5'>
+                                        <IconButton>
                                             <ChevronsLeft className='size-4' />
-                                        </button>
+                                        </IconButton>
 
-                                        <button className='bg-white/10 border border-white/10 rounded-md p-1.5'>
+                                        <IconButton>
                                             <ChevronLeft className='size-4' />
-                                        </button>
+                                        </IconButton>
 
-                                        <button className='bg-white/10 border border-white/10 rounded-md p-1.5'>
+                                        <IconButton>
                                             <ChevronRight className='size-4' />
-                                        </button>
+                                        </IconButton>
 
-                                        <button className='bg-white/10 border border-white/10 rounded-md p-1.5'>
+                                        <IconButton>
                                             <ChevronsRight className='size-4' />
-                                        </button>
+                                        </IconButton>
                                     </div>
                                 </div>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
+                            </Table.Ceel>
+                        </Table.Row>
+                    </Table.Foot>
+                </Table.Root>
             </div>
         </div>
     );
