@@ -55,7 +55,7 @@ export function AttendeeList() {
                 </div>
             </div>
 
-            <div className='border border-white/10 rounded-lg'>
+            <div className='border border-white/10 rounded-lg overflow-scroll min-w-[60rem]'>
                 <Table.Root>
                     <Table.Head>
                         <Table.Row className='border-b border-white/10'>
