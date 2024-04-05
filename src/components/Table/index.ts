@@ -15,3 +15,5 @@ export const Table = {
     Row: Row,
     Ceel: Cell,
 }
+
+export default Table;

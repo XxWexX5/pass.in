@@ -1,9 +1,43 @@
 import { Search, MoreHorizontal, ChevronsLeft, ChevronLeft, ChevronRight, ChevronsRight } from 'lucide-react'
+import dayjs from 'dayjs';
+import 'dayjs/locale/pt-br';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
 import { IconButton } from './IconButton';
 
-import { Table } from './Table';
+import Table from './Table';
+import { ChangeEvent, useState } from 'react';
+import { attendees } from '../data/attendees';
+
+dayjs.extend(relativeTime);
+dayjs.locale('pt-br')
 
 export function AttendeeList() {
+    const [search, setSearch] = useState('');
+    const [page, setPage] = useState(1);
+
+    const totalPages = Math.ceil(attendees.length / 10);
+
+    function handleSearch(event: ChangeEvent<HTMLInputElement>) {
+        return setSearch(event.target.value)
+    }
+
+    function goToNextPage() {
+        return setPage(page + 1)
+    }
+
+    function goToPreviousPage() {
+        return setPage(page - 1)
+    }
+
+    function goTototalPages() {
+        setPage(totalPages);
+    }
+
+    function goToFirstPage() {
+        setPage(1);
+    }
+
     return(
         <div className='flex flex-col gap-4'>
             <div className="flex gap-4 items-center">
@@ -13,8 +47,10 @@ export function AttendeeList() {
                     <Search className='size-4' />
 
                     <input 
+                        value={search}
                         className="bg-transparent flex-1 outline-none border-0 p-0 text-sm"
                         placeholder="Buscar participantes..."
+                        onChange={ handleSearch }
                     />
                 </div>
             </div>
@@ -39,24 +75,24 @@ export function AttendeeList() {
 
                     <Table.Body>
                         {
-                            Array.from({ length: 8 }).map((_, i) => {
+                            attendees.slice((page - 1) * 10, page * 10).map((attendee) => {
                                 return (
-                                    <Table.Row key={i} className='border-b border-white/10 hover:bg-white/5'>
+                                    <Table.Row key={attendee.id} className='border-b border-white/10 hover:bg-white/5'>
                                         <Table.Ceel>
                                             <input 
                                                 type='checkbox'
                                                 className='size-4 bg-black/20 rounded border-white/10'
                                             />
                                         </Table.Ceel>
-                                        <Table.Ceel>12383</Table.Ceel>
+                                        <Table.Ceel>{ attendee.id }</Table.Ceel>
                                         <Table.Ceel>
                                             <div className='flex flex-col gap-1'>
-                                                <span className='font-semibold text-white'>Wevison Ramalho Silva</span>
-                                                <span>wevisonramalho@gmail.com</span>
+                                                <span className='font-semibold text-white'>{ attendee.name }</span>
+                                                <span>{ attendee.email }</span>
                                             </div>
                                         </Table.Ceel>
-                                        <Table.Ceel>7 dias atrás</Table.Ceel>
-                                        <Table.Ceel>3 dias atrás</Table.Ceel>
+                                        <Table.Ceel>{ dayjs().to(attendee.createdAt) }</Table.Ceel>
+                                        <Table.Ceel>{ dayjs().to(attendee.checkedInAt) }</Table.Ceel>
                                         <Table.Ceel>
                                             <IconButton className='bg-black/20'>
                                                 <MoreHorizontal className='size-4' />
@@ -71,7 +107,7 @@ export function AttendeeList() {
                     <Table.Foot>
                         <Table.Row>
                             <Table.Ceel colSpan={3}>
-                                Mostrando 10 de 228 itens
+                                Mostrando 10 de { attendees.length } itens
                             </Table.Ceel>
 
                             <Table.Ceel 
@@ -79,22 +115,22 @@ export function AttendeeList() {
                                 colSpan={3}
                             >
                                 <div className='inline-flex items-center gap-8'>
-                                    Página 1 de 23
+                                    Página { page } de { totalPages }
 
                                     <div className='flex gap-1.5'>
-                                        <IconButton>
+                                        <IconButton onClick={goToFirstPage} disabled={page === 1}>
                                             <ChevronsLeft className='size-4' />
                                         </IconButton>
 
-                                        <IconButton>
+                                        <IconButton onClick={goToPreviousPage} disabled={page === 1}>
                                             <ChevronLeft className='size-4' />
                                         </IconButton>
 
-                                        <IconButton>
+                                        <IconButton onClick={goToNextPage} disabled={page === totalPages}>
                                             <ChevronRight className='size-4' />
                                         </IconButton>
 
-                                        <IconButton>
+                                        <IconButton onClick={goTototalPages} disabled={page === totalPages}>
                                             <ChevronsRight className='size-4' />
                                         </IconButton>
                                     </div>
