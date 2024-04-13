@@ -1,7 +1,7 @@
 # pass.in
 https://pass-in-nu.vercel.app/
 
-![52106d4a-201d-4eae-ad7f-0a5a52dde0b4](https://github.com/XxWexX5/pass.in/assets/37388037/323956c9-c1d9-42ce-9f83-676c2119e1b8)
+https://github.com/XxWexX5/pass.in/assets/37388037/df1dce8c-df66-4c25-98af-5d2183740426
 
 ## 🚀 Tecnologias
 
