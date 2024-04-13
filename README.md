@@ -10,14 +10,14 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 * ReactJS;
 * Tailwindcss;
 * NodeJS;
-__
+<br />
 
 ## 💻 Projeto
 
 Aplicação desenvolvida durante o NLW Unite da Rocketseat
 
 Pass.in - Sistema de check-in para eventos presenciais.
-__
+<br />
 
 ## 🎨 Design
 
